@@ -1,27 +1,49 @@
 import { Formik, Form } from "formik";
-import { createTaskRequest } from "../api/tasks.api";
-
+import { useTasks } from "../context/TaskProvider";
+import { useParams, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 function TaskForm() {
+  const { createTask, getTask, updateTask } = useTasks();
+  const [task, setTask] = useState({
+    title: "",
+    description: "",
+  });
 
+  const params = useParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const loadTask = async () => {
+      if (params.id) {
+        const task = await getTask(params.id);
+        setTask({
+          title: task.title,
+          description: task.description,
+        });
+      }
+    };
+    loadTask();
+  }, []);
 
   return (
     <div>
+      <h1>{params.id ? "Edit Task" : "New Task"}</h1>
       <Formik
-        initialValues={{
-          //definimos estados iniciales en Formik, no tengo que usar useState y mi propio manejador de estados.
-          title: "",
-          description: "",
-        }}
+        initialValues={task}
+        enableReinitialize={true} //Formik no permite reinicilizar los valores, por eso usamos el metodo
         onSubmit={async (values, actions) => {
           console.log(values);
-          try {
-            const response = await createTaskRequest(values);
-            console.log(response);
-            actions.resetForm();
-          } catch (error) {
-            console.error(error);
+          if (params.id) {
+            await updateTask(params.id, values);
+            navigate("/")
+          } else {
+            await createTask(values);
           }
+          setTask({
+            title: "",
+            description: "",
+          });
         }}
       >
         {(
