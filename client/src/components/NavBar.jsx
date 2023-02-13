@@ -2,14 +2,16 @@ import { Link } from "react-router-dom";
 
 function NavBar() {
     return (
-        <div>
+        <div className="bg-zinc-600 flex justify-between px-20 py-5">
+            <Link to="/" className="text-white font-bold">
             <h1>React MySQL</h1>
-            <ul>
+            </Link>
+            <ul className="flex gap-x-2">
                 <li>
-                    <Link to="/">Home</Link>
+                    <Link to="/" className="text-white px-4 py-2">Home</Link>
                 </li>
                 <li>
-                    <Link to="/new">Create Task</Link>
+                    <Link to="/new" className="text-white px-4 py-2">Create Task</Link>
                 </li>
             </ul>
         </div>
