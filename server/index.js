@@ -10,7 +10,7 @@ import taskRoutes from './routes/task.routes.js'
 
 const app = express();
 const __dirname = dirname(fileURLToPath(import.meta.url));
-console.log(__dirname);
+// console.log(__dirname);
 
 app.use(cors());
 
