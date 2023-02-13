@@ -21,5 +21,5 @@ app.use(taskRoutes);
 
 app.use(express.static(join(__dirname,'../client/dist')));//esto es para que el servidor sirva a client/dist
 
-app.listen(PORT)
+app.listen(process.env.PORT)
 console.log(`Server is listening on port ${PORT}`);
