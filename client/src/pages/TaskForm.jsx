@@ -28,7 +28,6 @@ function TaskForm() {
 
   return (
     <div>
-      <h1>{params.id ? "Edit Task" : "New Task"}</h1>
       <Formik
         initialValues={task}
         enableReinitialize={true} //Formik no permite reinicilizar los valores, por eso usamos el metodo
@@ -36,10 +35,10 @@ function TaskForm() {
           console.log(values);
           if (params.id) {
             await updateTask(params.id, values);
-            navigate("/")
           } else {
             await createTask(values);
           }
+          navigate("/");
           setTask({
             title: "",
             description: "",
@@ -49,24 +48,36 @@ function TaskForm() {
         {(
           { handleChange, handleSubmit, values, isSubmitting } //metemos el formulario dentro de una funcion jsx
         ) => (
-          <Form onSubmit={handleSubmit}>
-            <label>title</label>
+          <Form
+            onSubmit={handleSubmit}
+            className="bg-slate-300 max-w-sm rounded-md p-4 mx-auto"
+          >
+            <h1 className="text-xl font-bold uppercase text-center ">
+              {params.id ? "Edit Task" : "New Task"}
+            </h1>
+            <label className="block font-bold uppercase text-center m-2">title</label>
             <input
+              className="px-2 py-1 rounded-sm w-full"
               type="text"
               name="title"
               placeholder="Write a title"
               onChange={handleChange}
               value={values.title}
             />
-            <label>description</label>
+            <label className="block font-bold uppercase text-center m-2">description</label>
             <textarea
+              className="px-2 py-1 rounded-sm w-full"
               name="description"
               rows="5"
               placeholder="Write a description"
               onChange={handleChange}
               value={values.description}
             ></textarea>
-            <button type="submit" disabled={isSubmitting}>
+            <button
+              className="block bg-indigo-500 text-white px-2 py-1 rounded-sm w-full"
+              type="submit"
+              disabled={isSubmitting}
+            >
               {isSubmitting ? "Saving..." : "Save"}
             </button>
           </Form>

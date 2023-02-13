@@ -11,7 +11,7 @@ function NavBar() {
                     <Link to="/" className="text-white px-4 py-2">Home</Link>
                 </li>
                 <li>
-                    <Link to="/new" className="text-white px-4 py-2">Create Task</Link>
+                    <Link to="/new" className="bg-indigo-500 text-white px-4 py-2">Create Task</Link>
                 </li>
             </ul>
         </div>
