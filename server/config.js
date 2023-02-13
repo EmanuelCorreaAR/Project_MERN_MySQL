@@ -1,4 +1,3 @@
-export const PORT = process.env.PORT || 4000
 
 export const MYSQLHOST = process.env.MYSQLHOST || 'localhost'
 
