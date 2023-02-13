@@ -1,4 +1,5 @@
 import express from 'express';
+import { PORT } from './config.js';
 import cors from 'cors';
 import { dirname, join } from 'path';//permite generar una constante y extraer la ruta absoluta
 import { fileURLToPath } from 'url';
@@ -20,6 +21,5 @@ app.use(taskRoutes);
 
 app.use(express.static(join(__dirname,'../client/dist')));//esto es para que el servidor sirva a client/dist
 
-
-const PORT = process.env.PORT || 4000;
-app.listen(PORT, () => console.log(`Server is listening on port ${PORT}`))
+app.listen(PORT)
+console.log(`Server is listening on port ${PORT}`);
